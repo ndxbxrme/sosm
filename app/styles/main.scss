@@ -1,0 +1,113 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,700);
+* {padding:0; margin: 0}
+body, html {
+    min-height: 100%;
+    background: #fafafa url(http://subtlepatterns.com/patterns/crossword.png);
+}
+body {
+    position: relative;
+    padding-bottom: 6em;
+}
+.pl {
+    width: 100%;
+    height: 400px;
+    max-height: 100vh;
+    text-align: center;
+    font-family: Oswald, sans-serif;
+    color: #fff;
+    text-shadow: 0px 4px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 0px rgba(0,0,0,0.1);
+    h1 {
+        font-size: 9em;
+        z-index: 100;
+        letter-spacing: -3px;
+        transform: scaleY(0.8);
+        transition: 0.3s ease-in-out font-size;
+        opacity: 0.95;
+    }
+    h2 {
+        transition: 0.3s ease-in-out font-size;   
+    }
+    position: relative;
+    .inner {
+        position: absolute; 
+        top: 50%; left: 50%;
+        transform: translate(-50%,-50%);
+        width: 100%;
+    }
+    .bg {
+        content: '';
+        position: absolute; top: 0; left: 0;
+        width: 100%; height: 50%;
+        z-index: 0;   
+        box-shadow: 0px 4px 0px rgba(0,0,0,0.01);
+    }
+}
+
+.search-row {
+    text-align: center;
+    input.search {
+        width: 80%;
+        margin: 20px auto; 
+        height: 3em;
+        font-size: 2em;
+        padding: 0px 2em;
+        box-sizing: border-box;
+        border-width: 3px;
+        border-style: solid;
+        border-radius: 5px;
+        outline: none;
+        text-align: center;
+        box-shadow: inset 0px 4px 4px 0px rgba(0,0,0,0.1);
+        transition: 0.3s ease-in-out all;
+    }
+    .go {
+        border: 3px solid white;
+        border-radius: 5px;
+        font-size: 2em;
+        line-height: 2em;
+        color: #fff;
+        padding: 0em 2em;
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+        font-family: Oswald, sans-serif;
+    }
+}
+.footer {
+    width: 80%;
+    position: absolute;
+    bottom: 0; left: 10%;
+    text-align: right;
+    font-family: Oswald, sans-serif;
+}
+
+@media screen and (max-width:730px) {
+    .pl {
+        h1 {
+            font-size: 6em!important;   
+        }
+        h2 {
+            font-size: 1em!important;   
+        }
+    }
+    .search-row {
+        .search {
+            font-size: 1em!important;   
+        }
+    }
+}
+
+@media screen and (max-width:480px) {
+    .pl {
+        h1 {
+            font-size: 4em!important;   
+        }
+        h2 {
+            font-size: 0.8em!important;   
+        }
+    }
+    .search-row {
+        .search {
+            padding: 0.5em!important;   
+        }
+    }
+}

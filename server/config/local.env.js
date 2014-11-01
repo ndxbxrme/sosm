@@ -1,0 +1,8 @@
+'use strict';
+
+module.exports = {
+    CONSUMER_KEY: 'mHhInwh7gHj2mkS77bSbk7un8',
+    CONSUMER_SECRET: 'TKWm384vDQPB3yJ3a4IaUMvgb7c3TRe88EP7P4nL14XNh3QnXS',
+    ACCESS_TOKEN: '16545803-sDI9x71DroVvgtDNT8i4ZFR0uRru970325KkzYXb1',
+    ACCESS_TOKEN_SECRET: 'hzrbSQrrncfePnKxHpOSYQkkg1gSrmYcuD3Py4w8Wkf12'   
+};
