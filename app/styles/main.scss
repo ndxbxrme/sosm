@@ -138,38 +138,6 @@ body {
     font-family: Oswald, sans-serif;
 }
 
-@media screen and (max-width:730px) {
-    .pl {
-        h1 {
-            font-size: 6em!important;   
-        }
-        h2 {
-            font-size: 1em!important;   
-        }
-    }
-    .search-row {
-        .search {
-            font-size: 1em!important;   
-        }
-    }
-}
-
-@media screen and (max-width:480px) {
-    .pl {
-        h1 {
-            font-size: 4em!important;   
-        }
-        h2 {
-            font-size: 0.8em!important;   
-        }
-    }
-    .search-row {
-        .search {
-            padding: 0.5em!important;   
-        }
-    }
-}
-
 .showingResult, .searching, .parsing {
     .pl {
         height: 80px; 
@@ -218,6 +186,7 @@ body {
         text-shadow: 4px 0px 0px rgba(0,0,0,0.1);
         margin: 0px;
         font-size: 60px;
+        transition: 0.3s ease-in-out all;
     }
     .avatar {
         border-radius: 50%; 
@@ -255,5 +224,53 @@ body {
 .showingResult {
     .result {
         display: block;
+    }
+}
+
+@media screen and (max-width:730px) {
+    .pl {
+        h1 {
+            font-size: 6em!important;   
+        }
+        h2 {
+            font-size: 1em!important;   
+        }
+    }
+    .search-row {
+        .search {
+            font-size: 1em!important;   
+        }
+    }
+}
+
+@media screen and (max-width:480px) {
+    .pl {
+        h1 {
+            font-size: 4em!important;   
+        }
+        h2 {
+            font-size: 0.8em!important;   
+        }
+    }
+    .search-row {
+        .search {
+            padding: 0.5em!important;   
+        }
+    }
+    .result {
+        .sentiment {
+            width: 80px;
+            height: 80px;
+            font-size: 60px;
+            line-height: 70px;
+        }
+        h2 {
+            span {
+                display: block;
+            }
+        }
+        .positive, .negative {
+            float: left;   
+        }
     }
 }
