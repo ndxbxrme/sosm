@@ -3,10 +3,14 @@
 body, html {
     min-height: 100%;
     background: #fafafa url(http://subtlepatterns.com/patterns/crossword.png);
+    overflow-x: hidden;
 }
 body {
     position: relative;
     padding-bottom: 6em;
+}
+.pure-g {
+    letter-spacing: -1px; 
 }
 .pl {
     width: 100%;
@@ -17,6 +21,8 @@ body {
     color: #fff;
     text-shadow: 0px 4px 0px rgba(0,0,0,0.1);
     box-shadow: 0px 4px 0px rgba(0,0,0,0.1);
+    position: relative;
+    transition: 0.3s ease-in-out height;
     h1 {
         font-size: 9em;
         z-index: 100;
@@ -24,11 +30,21 @@ body {
         transform: scaleY(0.8);
         transition: 0.3s ease-in-out font-size;
         opacity: 0.95;
+        margin: 0px;
+        position: relative;
+        display: inline-block;
+    }
+    h1:after {
+        position: absolute;
+        top: 1em; right: -0.1em;
+        content: 'beta';
+        font-size: 0.2em;
+        letter-spacing: 0;
     }
     h2 {
-        transition: 0.3s ease-in-out font-size;   
+        transition: 0.3s ease-in-out font-size;
+        margin: 0px;
     }
-    position: relative;
     .inner {
         position: absolute; 
         top: 50%; left: 50%;
@@ -48,6 +64,7 @@ body {
     text-align: center;
     input.search {
         width: 80%;
+        max-width: 1200px;
         margin: 20px auto; 
         height: 3em;
         font-size: 2em;
@@ -71,10 +88,14 @@ body {
         box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
         font-family: Oswald, sans-serif;
     }
+    .go[disabled] {
+        background-color: #ccc!important; 
+    }
 }
 .footer {
     width: 80%;
-    position: absolute;
+    margin: 30px auto;
+    max-width: 1200px;
     bottom: 0; left: 10%;
     text-align: right;
     font-family: Oswald, sans-serif;
@@ -109,5 +130,93 @@ body {
         .search {
             padding: 0.5em!important;   
         }
+    }
+}
+
+.showingResult, .searching, .parsing {
+    .pl {
+        height: 80px; 
+        
+        h1 {
+            font-size: 3.5em!important;
+        }
+        h2 {
+            display: none;   
+        }
+    }
+    .search-row {
+        input.search {
+            font-size: 1em!important;   
+        }
+    }
+}
+.result {
+    display: none;
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    h2 {
+        font-family: Oswald;
+        margin: 0px;
+        float: left;
+        text-shadow: 0px 2px 0px rgba(0,0,0,0.1);
+    }
+    .pure-g {
+      padding: 10px 10px 30px 10px;
+      margin-bottom: 20px;
+      box-shadow: 0px 4px 4px rgba(0,0,0,0.03);
+      background: #fff;
+      border-radius: 5px;
+    }
+    .sentiment {
+        text-align: center;
+        width: 100px;
+        height: 100px;
+        line-height: 90px;
+        color: #fff;
+        border-radius: 10px;
+        transform: rotate(90deg);
+        letter-spacing: 4px;
+        box-shadow: 4px 0px 0px rgba(0,0,0,0.1);
+        text-shadow: 4px 0px 0px rgba(0,0,0,0.1);
+        margin: 0px;
+        font-size: 60px;
+    }
+    .avatar {
+        border-radius: 50%; 
+        border: 3px solid #fff;
+        box-shadow: 0px 1px 0px rgba(0,0,0,0.3);
+        transition: 0.1s ease-in-out transform;
+    }
+    .avatar:hover {
+        transform: scale(1.15); 
+    }
+    .positive, .negative {
+      float: right;
+      clear: right;
+      position: relative;
+      padding-left: 16px;
+    }
+    .positive:before {
+      font-family: 'icomoon';
+      content: '\e600';
+      position: absolute;
+      top: 10%; left: 0;
+      opacity: 0.3;
+    }
+    .negative:before {
+      font-family: 'icomoon';
+      content: '\e601';
+      position: absolute;
+      top: 10%; left: 0;
+      opacity: 0.3;
+    }
+    .overall {
+      border: 2px dashed rgba(0,0,0,0.1); 
+    }
+}
+.showingResult {
+    .result {
+        display: block;
     }
 }
