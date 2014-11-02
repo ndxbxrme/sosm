@@ -47,14 +47,50 @@ angular.module('sosmApp')
     $http.post('/api/collect', {search:$scope.search})
     .success(function(data) {
       $scope.state = 'parsing';
-      $scope.sentiments = [
-        new Sentiment('overall', 'Overall', moment().add(-1, 'years'), moment()),
-        new Sentiment('today', 'Today', moment().add(-1, 'days'), moment()),
-        new Sentiment('yesterday', 'Yesterday', moment().add(-2, 'days'), moment().add(-1, 'days'))
-      ];
+      $scope.sentiments = [];
       $timeout(function(){
         if(data && data.length > 0) {
-          $scope.alltime = new Sentiment();
+          var dateNewest = moment(Date.parse(data[0].created_at));
+          var dateOldest = moment(Date.parse(data[data.length-1].created_at));
+          var duration = moment.duration(dateNewest.diff(dateOldest)).asHours();
+          $scope.sentiments.push(new Sentiment('overall', 'Overall', dateOldest.add(-1, 'days'), moment()));
+          if(duration < 12) {
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment()._d), moment().add(-15, 'minutes'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-15, 'minutes')._d), moment().add(-30, 'minutes'), moment().add(-15, 'minutes')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-30, 'minutes')._d), moment().add(-45, 'minutes'), moment().add(-30, 'minutes')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-45, 'minutes')._d), moment().add(-60, 'minutes'), moment().add(-45, 'minutes')));
+          }
+          else if(duration < 24) {
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment()._d), moment().add(-2, 'hours'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-2, 'hours')._d), moment().add(-4, 'minutes'), moment().add(-2, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-4, 'hours')._d), moment().add(-6, 'minutes'), moment().add(-4, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-6, 'hours')._d), moment().add(-8, 'minutes'), moment().add(-6, 'hours')));
+          }
+          else if(duration < 48) {
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment()._d), moment().add(-6, 'hours'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-6, 'hours')._d), moment().add(-12, 'hours'), moment().add(-6, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-12, 'hours')._d), moment().add(-18, 'hours'), moment().add(-12, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-18, 'hours')._d), moment().add(-24, 'hours'), moment().add(-18, 'hours')));            
+          }
+          else if(duration < 168) {
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment()._d), moment().add(-12, 'hours'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-12, 'hours')._d), moment().add(-24, 'hours'), moment().add(-12, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-24, 'hours')._d), moment().add(-36, 'hours'), moment().add(-24, 'hours')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-36, 'hours')._d), moment().add(-48, 'hours'), moment().add(-36, 'hours')));    
+            
+          }
+          else if(duration < 336) {
+            $scope.sentiments.push(new Sentiment('overall', 'today', moment().add(-1, 'days'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', 'yesterday', moment().add(-2, 'days'), moment().add(-1, 'days')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-2, 'days')._d), moment().add(-3, 'days'), moment().add(-2, 'days')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-3, 'days')._d), moment().add(-4, 'days'), moment().add(-3, 'days'))); 
+          }
+          else {
+            $scope.sentiments.push(new Sentiment('overall', 'today', moment().add(-1, 'days'), moment()));
+            $scope.sentiments.push(new Sentiment('overall', 'yesterday', moment().add(-2, 'days'), moment().add(-1, 'days')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-2, 'days')._d), moment().add(-3, 'days'), moment().add(-2, 'days')));
+            $scope.sentiments.push(new Sentiment('overall', $.timeago(moment().add(-3, 'days')._d), moment().add(-4, 'days'), moment().add(-3, 'days')));             
+          }
           angular.forEach(data, function(item){
             var date = moment(Date.parse(item.created_at));
             item.polarity = Math.max(-5, Math.min(5, item.polarity));
@@ -80,8 +116,6 @@ angular.module('sosmApp')
           angular.forEach($scope.sentiments, function(sentiment){
             sentiment.update();
           });
-          var dateNewest = moment(Date.parse(data[0].created_at));
-          var dateOldest = moment(Date.parse(data[data.length-1].created_at));
           console.log(dateNewest.format());
           console.log(dateOldest.format());
         }
