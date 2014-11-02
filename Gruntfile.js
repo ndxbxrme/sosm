@@ -372,7 +372,8 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'styles/*.css'
           ]
         }, {
           expand: true,
@@ -385,7 +386,13 @@ module.exports = function (grunt) {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
-        src: '{,*/}*.css'
+        src: ['{,*/}*.css', '../fonts/*']
+      },
+      fonts: {
+        expand: true,
+        cwd: '<%=yeoman.app%>/fonts',
+        dest: '<%= yeoman.dist %>/fonts/',
+        src: '*.*'
       }
     },
 
@@ -426,6 +433,8 @@ module.exports = function (grunt) {
       'configureProxies',
       'develop',
       'concurrent:server',
+      'copy:styles',
+      'copy:fonts',
       'autoprefixer',
       'connect:livereload',
       'watch'
