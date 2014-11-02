@@ -11,6 +11,6 @@
 angular.module('sosmApp')
   .filter('unambiguate', function () {
     return function (input) {
-      return input.replace(/less than |more than |about /gi,'');
+      return input.replace(/less than |more than |about /gi,'').replace('a minute ago', 'Now');
     };
   });
