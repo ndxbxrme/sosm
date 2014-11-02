@@ -27,7 +27,6 @@
 
     </div>
 
-
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -72,5 +71,10 @@
     <script src="scripts/filters/unambiguate.js"></script>
     <script src="scripts/directives/sentiment.js"></script>
     <!-- endbuild -->
+    <script>
+      var url ='styles/icons.svg';
+      var c=new XMLHttpRequest(); c.open('GET', url, false); c.setRequestHeader('Content-Type', 'text/xml'); c.send();
+      document.body.insertBefore(c.responseXML.firstChild, document.body.firstChild)
+    </script>
 </body>
 </html>

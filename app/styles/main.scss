@@ -36,6 +36,10 @@
 	content: "\e602";
 }
 
+.text-center {
+    text-align: center;   
+}
+
 
 body, html {
     min-height: 100%;
@@ -44,10 +48,14 @@ body, html {
 }
 body {
     position: relative;
-    padding-bottom: 6em;
 }
 .pure-g {
     letter-spacing: -1px; 
+}
+.pure-g > div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 h1, h2 {
     font-family: Oswald, sans-serif; 
@@ -117,19 +125,21 @@ h1, h2 {
         box-shadow: inset 0px 4px 4px 0px rgba(0,0,0,0.1);
         transition: 0.3s ease-in-out all;
     }
-    .go {
-        border: 3px solid white;
-        border-radius: 5px;
-        font-size: 2em;
-        line-height: 2em;
-        color: #fff;
-        padding: 0em 2em;
-        box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
-        font-family: Oswald, sans-serif;
-    }
-    .go[disabled] {
-        background-color: #ccc!important; 
-    }
+
+}
+
+.go {
+    border: 3px solid white;
+    border-radius: 5px;
+    font-size: 2em;
+    line-height: 2em;
+    color: #fff;
+    padding: 0em 2em;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    font-family: Oswald, sans-serif;
+}
+.go[disabled] {
+    background-color: #ccc!important; 
 }
 .footer {
     width: 80%;
@@ -225,6 +235,38 @@ h1, h2 {
 .showingResult {
     .result {
         display: block;
+    }
+}
+
+.blurb {
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    margin: 90px auto;
+    
+    .l-box {
+        padding: 30px;   
+    }
+    
+    h2 {
+        text-align: center;   
+        margin: 0;
+    }
+    p {
+        opacity: 0.6;
+        line-height: 1.6em;
+    }
+    
+    .icons {
+        text-align: center;  
+        opacity: 0.6;
+        svg {
+            width: 64px;   
+        }
+        .plus {
+            font-size: 50px;
+            vertical-align: text-bottom;
+        }
     }
 }
 
