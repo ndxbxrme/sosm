@@ -48,6 +48,16 @@ app.post('/api/collect', function(req,res) {
     });
 });
 
+//ANGULAR BIT
+app.use('/scripts', gzippo.staticGzip(__dirname + '/../dist/scripts'));
+app.use('/images', gzippo.staticGzip(__dirname + '/../dist/images'));
+app.use('/styles', gzippo.staticGzip(__dirname + '/../dist/styles'));
+app.use('/views', gzippo.staticGzip(__dirname + '/../dist/views'));
+app.all('/*', function(req, res) {
+  res.sendFile('index.html', {root: __dirname + '/../dist'});
+});  
+
+
 app.listen(app.get('port'), function(){
     console.log('server listening on ' + app.get('port'));
 });
