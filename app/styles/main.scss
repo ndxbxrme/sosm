@@ -259,10 +259,10 @@ body {
     }
     .result {
         .sentiment {
-            width: 80px;
-            height: 80px;
-            font-size: 60px;
-            line-height: 70px;
+            width: 70px;
+            height: 70px;
+            font-size: 50px;
+            line-height: 60px;
         }
         h2 {
             span {
@@ -271,6 +271,9 @@ body {
         }
         .positive, .negative {
             float: left;   
+        }
+        .avatar {
+            width: 33px;   
         }
     }
 }
