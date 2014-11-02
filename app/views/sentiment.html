@@ -1,0 +1,14 @@
+<div class="pure-g {{sentiment.class}}">
+    <div class="pure-u-md-1-5 pure-u-1-3">
+        <div class="sentiment {{sentiment.color}}">{{sentiment.face}}</div>
+    </div>
+    <div class="pure-u-md-4-5 pure-u-2-3">
+        <h2 class="c1">{{sentiment.title | unambiguate}} - {{sentiment.polarity * 10}}%, &nbsp; <span class="c3">Spread - {{sentiment.spread * 10}}%</span></h2>
+        <div class="positive" ng-show="sentiment.positive.length>0">
+          <span ng-repeat="item in sentiment.positive | orderBy:'-polarity' | limitTo:3"><a href="{{item.user.url}}"><img ng-src="{{item.user.profile_image_url}}" class="avatar" tooltip="{{item.text}}" /></a></span>
+        </div>
+        <div class="negative" ng-show="sentiment.negative.length>0">
+          <span ng-repeat="item in sentiment.negative | orderBy:'polarity' | limitTo:3"><a href="{{item.user.url}}"><img ng-src="{{item.user.profile_image_url}}" class="avatar" tooltip="{{item.text}}" /></a></span>
+        </div>
+    </div>
+</div>

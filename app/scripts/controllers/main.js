@@ -63,7 +63,7 @@ angular.module('sosmApp')
             item.polarity = Math.max(-5, Math.min(5, item.polarity));
             angular.forEach($scope.sentiments, function(sentiment){
               if(date.isAfter(sentiment.from) && date.isBefore(sentiment.to)) {
-                if(item.polarity < 0) {
+                if(item.polarity < 1) {
                   sentiment.negative.push(item); 
                 }
                 else if(item.polarity > 0) {
