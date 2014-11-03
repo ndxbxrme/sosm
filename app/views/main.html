@@ -9,6 +9,7 @@
 </div>
 <div class="result" ng-if="sentiments.length>0">
     <div sentiment="sentiments[0]"></div>
+    <div id="myfirstchart" style="height: 200px; width: 100%;"></div>
     <h2 class="c3">Breakdown</h2>
     <div  ng-repeat="sentiment in sentiments" sentiment="sentiment" ng-if="$index>0"></div>
 </div>

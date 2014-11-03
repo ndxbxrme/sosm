@@ -8,9 +8,11 @@
  * Controller of the sosmApp
  */
 angular.module('sosmApp')
-.controller('MainCtrl', function ($scope, $http, $timeout, faces) {
+.controller('MainCtrl', function ($scope, $http, $timeout, $filter, faces, Colours) {
+  console.log(Colours.colours);
   $scope.pease = Please;
-  function Sentiment(_class, title, from, to){
+  function Sentiment(_class, title, from, to, no){
+    this.no = no;
     this.class = _class;
     this.title = title;
     this.from = from;
@@ -54,9 +56,9 @@ angular.module('sosmApp')
           var dateOldest = moment(Date.parse(data[data.length-1].created_at));
           var duration = moment.duration(dateNewest.diff(dateOldest)).asHours();
           var step = Math.floor(duration / 6);
-          $scope.sentiments.push(new Sentiment('overall', 'Overall', dateOldest.add(-1, 'days'), moment()));
+          $scope.sentiments.push(new Sentiment('overall', 'Overall', dateOldest.add(-1, 'days'), moment(), 0));
           for(var f = 0; f<duration; f+=step) {
-            $scope.sentiments.push(new Sentiment('default', $.timeago(moment().add(-f, 'hours')._d), moment().add(-(f+step), 'hours'), moment().add(-f, 'hours')));
+            $scope.sentiments.push(new Sentiment('default', $.timeago(moment().add(-f, 'hours')._d), moment().add(-(f+step), 'hours'), moment().add(-f, 'hours'), f));
           }
           angular.forEach(data, function(item){
             var date = moment(Date.parse(item.created_at));
@@ -85,8 +87,25 @@ angular.module('sosmApp')
           angular.forEach($scope.sentiments, function(sentiment){
             sentiment.update();
           });
-          console.log(dateNewest.format());
-          console.log(dateOldest.format());
+          var gdata = [];
+          for(var i=$scope.sentiments.length-1;i>0;i--) {
+            gdata.push({title:$filter('unambiguate')($scope.sentiments[i].title),polarity:$scope.sentiments[i].polarity * 10,lowest:($scope.sentiments[i].lowest + 5) * 10, highest:($scope.sentiments[i].highest + 5) * 10}); 
+          }
+          $timeout(function(){
+            new Morris.Line({
+                element: 'myfirstchart',
+                data: gdata,
+                xkey: 'title',
+                ykeys: ['polarity', 'highest', 'lowest'],
+                labels: ['Happiness','Highest','Lowest'],
+                lineColors: [Colours.colours[0],'#cccccc','#cccccc'],
+                parseTime: false,
+                ymax:100,
+                ymin:0,
+                postUnits:'%',
+                resize:true
+              });
+          });
         }
         $scope.state = 'showingResult';
       });

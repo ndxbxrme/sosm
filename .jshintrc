@@ -23,6 +23,8 @@
     "Please": false,
     "moment": false,
     "S": false,
-    "$": false
+    "$": false,
+    "Morris": false,
+    "_": false
   }
 }

@@ -323,3 +323,15 @@ h1, h2 {
         }
     }
 }
+
+.morris-hover {
+    background: rgba(255,255,255,0.96)!important;
+    text-align: left!important;
+    .morris-hover-row-label {
+        font-family: Oswald;
+        font-size: 1.3em;
+    }
+    .morris-hover-point {
+        color: #333!important;   
+    }
+}
